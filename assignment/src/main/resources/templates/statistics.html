@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Statistics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/mystyle.css"/>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+</head>
+<body>
+<div th:replace="commons/select_input::select_input_divs"></div>
+<div class="container">
+    <h1>Cache Statistics</h1>
+</div>
+<table class="table container table-bordered statistic_tbl" th:if="${statistics != null}">
+    <thead>
+        <tr>
+            <th class="table-secondary">Size</th>
+            <th class="table-secondary">Hits</th>
+            <th class="table-secondary">Misses</th>
+            <th class="table-secondary">Collected</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td th:text="${statistics.getSize()}"></td>
+            <td th:text="${statistics.getHits()}"></td>
+            <td th:text="${statistics.getMisses()}"></td>
+            <td th:text="${statistics.getCollected()}"></td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    var byCity = "City or Country. Ex: Portugal"
+    var byGeo = "Geo coordinates. Ex: 32.65, -16.92"
+    $(".select_box").change(function (){
+        if ($(".select_box").val() === '1'){
+            $('input').attr('placeholder', byCity)
+        }else {
+            $('input').attr('placeholder', byGeo)
+        }
+    })
+
+    $("form").submit(function() {
+        var v = $('.input').val();
+        if (v === '' || v == null || v.trim() === ''){
+            $('.input').attr('disabled', 'disabled')
+            return true
+        }
+        if ($(".select_box").val() === '1'){
+            $("form").attr("action", '/air_quality/location/' + v);
+        }else{
+            var coords = v.split(',');
+            if (coords.length === 1){
+                $("form").attr("action", '/air_quality/geo/' + coords + ':none');
+            }else{
+                $("form").attr("action", '/air_quality/geo/' + coords[0].trim() + ':' + coords[1].trim());
+            }
+        }
+    });
+</script>
+</body>
+</html>

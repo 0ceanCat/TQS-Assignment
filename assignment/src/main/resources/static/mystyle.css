@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.select_div{
+    float: left;
+    margin: 10px;
+}
+
+.search_div{
+    margin: 38px auto;
+    border-radius: 30px;
+}
+
+
+.search_div .search_box{
+    position: relative;
+    width: 80%;
+    height: 50px;
+    float: right;
+}
+
+.search_div .search_box .input{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px 35% 10px 45px;
+    border-radius: 30px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 2px #005efe;
+}
+
+.search_div .search_box .sub_btn{
+    position: absolute;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    border-radius: 30px;
+    background: rgb(90, 128, 251);
+    z-index: 1;
+    cursor: pointer;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+
+
+.search_div .search_box .fa-search{
+    position: absolute;
+    top: 32%;
+    left: 2%;
+    font-size: 20px;
+    justify-content: center;
+    z-index: 1;
+}
+
+.search_div .search_box .fa-camera{
+    position: absolute;
+    top: 27%;
+    right: 26%;
+    font-size: 30px;
+    color: rgb(220, 220, 220);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.search_div:hover .input{
+    box-shadow: 0px 0px 5px #005efe;
+}
+
+.search_div .search_box .fa-camera:hover{
+    color: rgb(183, 209, 254);
+}
+
+.statistic_btn{
+    position: absolute;
+    margin-top: 50px;
+}

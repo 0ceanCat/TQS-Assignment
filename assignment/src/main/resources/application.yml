@@ -1,0 +1,10 @@
+cache-collector:
+  ttl: 10 # 10s
+  interval: 11 # 10s
+
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/
+  thymeleaf:
+    cache: false

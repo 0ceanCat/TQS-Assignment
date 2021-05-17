@@ -92,12 +92,12 @@ public class AQTemplatesController_WithMock {
     }
 
     @Test
-    public void givenLisbonGeo_returnLisbon() throws Exception {
+    public void givenPortoGeo_returnPorto() throws Exception {
 
         AirQResponse another = new AirQResponse();
         BeanUtils.copyProperties(airQResponse, another);
         another.setCity(new City());
-        another.getCity().setName("Lisbon");
+        another.getCity().setName("Porto");
         another.getCity().setGeo(new Geo());
         another.getCity().getGeo().setLat(30.0);
         another.getCity().getGeo().setLng(40.0);
@@ -107,7 +107,7 @@ public class AQTemplatesController_WithMock {
                 .andExpect(status().isOk())
                 .andExpect(view().name("details"))
                 .andExpect(xpath("//h1[1]").string("Tqs Air Quality"))
-                .andExpect(xpath("//h1[@id='city_name']").string("Lisbon"))
+                .andExpect(xpath("//h1[@id='city_name']").string("Porto"))
                 .andExpect(xpath("//h1[@id='city_geo']").string("Geo: 30.00, 40.00"))
                 // iaqis ↓
                 .andExpect(xpath("//table[contains(@class, 'iaqis-tbl')]//td[1]").string("10")) // p

@@ -34,16 +34,16 @@ public class AQJsonController_RestAssured_IT {
 
     @Test
     @Order(1)
-    public void givenLisbon_returnLisbon_CacheSize1(){
-        String lisbon = "lisbon";
+    public void givenPorto_returnPorto_CacheSize1(){
+        String lisbon = "porto";
         RestAssuredMockMvc.given()
                 .get("/air_quality/json/location/{location}/", lisbon)
                 .then()
                 .assertThat().statusCode(200)
                 .assertThat().body("msg", is("success"))
-                .assertThat().body("data.city.name", is("Entrecampos, Lisboa, Portugal"))
-                .assertThat().body("data.city.geo.latitude", is("38.75"))
-                .assertThat().body("data.city.geo.longitude", is("-9.15"));
+                .assertThat().body("data.city.name", is("Sobreiras-Lordelo do Ouro, Porto, Portugal"))
+                .assertThat().body("data.city.geo.latitude", is("41.15"))
+                .assertThat().body("data.city.geo.longitude", is("-8.66"));
 
         assertEquals(1, cache.size());
     }

@@ -39,14 +39,14 @@ public class AQTemplatesControllerIT {
 
     @Test
     @Order(1)
-    public void givenLisbon_returnLisbon_CacheSize1() throws Exception {
-        mvc.perform(get("/air_quality/location/{location}", "Lisbon"))
+    public void givenPorto_returnPorto_CacheSize1() throws Exception {
+        mvc.perform(get("/air_quality/location/{location}", "Porto"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("details"))
                 .andExpect(xpath("//h1[@id='city_name']")
-                        .string("Entrecampos, Lisboa, Portugal"))
+                        .string("Sobreiras-Lordelo do Ouro, Porto, Portugal"))
                 .andExpect(xpath("//h1[@id='city_geo']")
-                        .string("Geo: 38.75, -9.15"));
+                        .string("Geo: 41.15, -8.66"));
 
         assertEquals(1, cache.size());
     }
@@ -72,11 +72,11 @@ public class AQTemplatesControllerIT {
     @Order(3)
     public void get2CachedCities_thenHit2() throws Exception {
 
-        mvc.perform(get("/air_quality/location/{location}", "Lisbon"))
+        mvc.perform(get("/air_quality/location/{location}", "Porto"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("details"))
-                .andExpect(xpath("//h1[@id='city_name']").string("Entrecampos, Lisboa, Portugal"))
-                .andExpect(xpath("//h1[@id='city_geo']").string("Geo: 38.75, -9.15"));
+                .andExpect(xpath("//h1[@id='city_name']").string("Sobreiras-Lordelo do Ouro, Porto, Portugal"))
+                .andExpect(xpath("//h1[@id='city_geo']").string("Geo: 41.15, -8.66"));
 
         mvc.perform(get("/air_quality/location/{location}", "abcde"))
                 .andExpect(status().isOk())

@@ -47,13 +47,13 @@ public class AutomationTest {
 
   @Test
   @Order(2)
-  public void givenValidLocation_Lisbon(){
+  public void givenValidPorto_Porto(){
     driver.findElement(By.cssSelector(".input")).click();
-    driver.findElement(By.cssSelector(".input")).sendKeys("lisbon");
+    driver.findElement(By.cssSelector(".input")).sendKeys("Porto");
     driver.findElement(By.cssSelector(".input")).sendKeys(Keys.ENTER);
     assertThat(driver.getTitle(), is("Details"));
-    assertThat(driver.findElement(By.id("city_name")).getText(), is("Entrecampos, Lisboa, Portugal"));
-    assertThat(driver.findElement(By.id("city_geo")).getText(), is("Geo: 38.75, -9.15"));
+    assertThat(driver.findElement(By.id("city_name")).getText(), is("Sobreiras-Lordelo do Ouro, Porto, Portugal"));
+    assertThat(driver.findElement(By.id("city_geo")).getText(), is("Geo: 41.15, -8.66"));
   }
 
   @Test

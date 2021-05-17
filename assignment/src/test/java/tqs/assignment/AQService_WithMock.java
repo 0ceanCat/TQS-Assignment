@@ -55,13 +55,13 @@ public class AQService_WithMock {
         // when get Aveiro's air quality, service will find Aveiro's air info in cache
         Mockito.when(cache.get(location)).thenReturn(airQResponse);
 
-        // when get Lisbon's air quality, service should parse a Map object and build response
-        String url = getUrl("lisbon");
-        Map<String, Object> lisbonMap = new HashMap<>();
-        lisbonMap.put("status", "success");
-        lisbonMap.put("data", Map.of("city", Map.of("name", "lisbon")));
+        // when get Porto's air quality, service should parse a Map object and build a response
+        String url = getUrl("porto");
+        Map<String, Object> portoMap = new HashMap<>();
+        portoMap.put("status", "success");
+        portoMap.put("data", Map.of("city", Map.of("name", "porto")));
         Mockito.when(restTemplate
-                .getForObject(url, Map.class)).thenReturn(lisbonMap);
+                .getForObject(url, Map.class)).thenReturn(portoMap);
 
 
         url = getUrl("invalid");
@@ -86,14 +86,14 @@ public class AQService_WithMock {
 
     @Test
     void givenValidCity_thenIsPutInCache() {
-        AirQResponse lisbon = service.getAirQualityByLocation("lisbon");
+        AirQResponse porto = service.getAirQualityByLocation("porto");
 
-        assertEquals("lisbon", lisbon.getCity().getName());
-        assertNull(lisbon.getForecasts());
-        assertNull(lisbon.getIaqis());
+        assertEquals("porto", porto.getCity().getName());
+        assertNull(porto.getForecasts());
+        assertNull(porto.getIaqis());
 
-        verify(cache, VerificationModeFactory.times(1)).get("lisbon");
-        verify(cache, VerificationModeFactory.times(1)).put("lisbon", lisbon);
+        verify(cache, VerificationModeFactory.times(1)).get("porto");
+        verify(cache, VerificationModeFactory.times(1)).put("porto", porto);
     }
 
     @Test

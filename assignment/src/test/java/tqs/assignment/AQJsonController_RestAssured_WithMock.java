@@ -99,12 +99,12 @@ public class AQJsonController_RestAssured_WithMock {
                 .assertThat().body("data.forecasts.pm1[0].min", is(2));
     }
     @Test
-    public void givenLisbonGeo_returnLisbon() {
-        String lisbon = "Lisbon";
+    public void givenPortoGeo_returnPorto() {
+        String porto = "Porto";
         AirQResponse another = new AirQResponse();
         BeanUtils.copyProperties(airQResponse, another);
         another.setCity(new City());
-        another.getCity().setName(lisbon);
+        another.getCity().setName(porto);
         another.getCity().setGeo(new Geo());
         another.getCity().getGeo().setLat(30.0);
         another.getCity().getGeo().setLng(40.0);
@@ -115,7 +115,7 @@ public class AQJsonController_RestAssured_WithMock {
                 .then()
                 .assertThat().statusCode(200)
                 .assertThat().body("msg", is("success"))
-                .assertThat().body("data.city.name", is(lisbon))
+                .assertThat().body("data.city.name", is(porto))
                 .assertThat().body("data.city.geo.latitude", is("30.00"))
                 .assertThat().body("data.city.geo.longitude", is("40.00"))
                 .assertThat().body("data.dominentpol", is("humidity"))

@@ -5,6 +5,7 @@ import tqs.assignment.component.Cache;
 import tqs.assignment.entity.AirQResponse;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -33,7 +34,7 @@ class Cache_UnitTest {
 
     @Test
     @Order(2)
-    void get4ExistedData() {
+    void get4CachedData() {
         Stream.of("A", "B", "C", "D")
                 .forEach(param -> assertEquals(AIR_Q_RESPONSE, cache.get(param)));
     }
@@ -85,7 +86,7 @@ class Cache_UnitTest {
             // manually call the cache collector to collect expired data
             cache.collector();
 
-            // wait for cache collector finish it's work, 100 ms
+            // wait for cache collector to finish it's work, 100 ms
             TimeUnit.MILLISECONDS.sleep(100);
 
             // all of them were collected, so we get Null
@@ -120,7 +121,7 @@ class Cache_UnitTest {
             for (int i = 0; i < 5; i++) {
                 int iCopy = i;
                 new Thread(()->{
-                    for (int k = 0; k < 10000; k++) {
+                    for (int k = 0; k < 10_000; k++) {
                         cache.put(iCopy  + "_" + k, AIR_Q_RESPONSE);
                     }
                     count.countDown();
@@ -128,7 +129,7 @@ class Cache_UnitTest {
             }
         });
 
-        // wait for all threads finish it's work
+        // wait for all threads to finish it's work
         count.await();
     }
 
@@ -139,7 +140,7 @@ class Cache_UnitTest {
         assertDoesNotThrow(()->{
             for (int i = 0; i < 5; i++) {
                 new Thread(()->{
-                    for (int k = 0; k < 10000; k++) {
+                    for (int k = 0; k < 10_000; k++) {
                         cache.get("A");
                     }
                     count.countDown();
@@ -147,7 +148,7 @@ class Cache_UnitTest {
             }
         });
 
-        // wait for all threads finish it's work
+        // wait for all threads to finish it's work
         count.await();
 
     }
